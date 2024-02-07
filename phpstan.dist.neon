@@ -1,0 +1,11 @@
+parameters:
+    level: 9
+    checkUninitializedProperties: true
+    checkBenevolentUnionTypes: true
+    paths:
+        - bin/
+        - config/
+        - public/
+        - src/
+        #- tests/
+    phpVersion: 80300 # PHP 8.3.0

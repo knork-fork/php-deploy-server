@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-docker run -v $PWD:/application -w /application -v /tmp:/tmp --rm ghcr.io/phpstan/phpstan:1.10.50
+docker exec -it deploy-server-php-fpm /application/vendor/phpstan/phpstan/phpstan "$@"
