@@ -1,3 +1,4 @@
+logs/
 
 ###> symfony/framework-bundle ###
 /.env.local
@@ -13,4 +14,7 @@
 phpstan.neon
 ###< phpstan/phpstan ###
 
-logs/
+###> friendsofphp/php-cs-fixer ###
+/.php-cs-fixer.php
+/.php-cs-fixer.cache
+###< friendsofphp/php-cs-fixer ###
