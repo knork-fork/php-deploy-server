@@ -1,5 +1,9 @@
 <?php
 
-//error_log("Test error log entry.", 3, "/var/log/php_errors.log");
+use App\Kernel;
 
-die('Hello World!');
+require_once dirname(__DIR__).'/vendor/autoload_runtime.php';
+
+return function (array $context) {
+    return new Kernel($context['APP_ENV'], (bool) $context['APP_DEBUG']);
+};
