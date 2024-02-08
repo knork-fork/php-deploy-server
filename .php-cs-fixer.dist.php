@@ -3,6 +3,7 @@
 $finder = (new PhpCsFixer\Finder())
     ->in([
         'examples/',
+        'scripts/',
         'src/',
         #'tests/',
         #'migrations/',

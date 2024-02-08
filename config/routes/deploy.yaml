@@ -1,0 +1,4 @@
+deploy_route:
+    path: /deploy
+    controller: App\Controller\DeployController::deploy
+    methods: POST

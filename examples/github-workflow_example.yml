@@ -1,0 +1,31 @@
+### Move to e.g. .github/workflows/github-ci.yml
+
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        name: Checkout latest master
+    
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+
+      - name: Get signed payload
+        env:
+          ## Make sure to setup both environment secret (see settings/secrets/actions on github) and add the same secret to .env.local
+          DEPLOY_TOKEN_SECRET: ${{ secrets.DEPLOY_TOKEN_SECRET }}
+          REPO_NAME: ${{ github.repository }}
+        id: signed_payload
+        run: echo "::set-output name=payload::$(php examples/get_signed_payload_example.php)"
+
+      - name: Send signed payload to deploy server
+        run: echo "The payload is ${{ steps.signed_payload.outputs.payload }}"

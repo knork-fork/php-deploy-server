@@ -38,4 +38,6 @@ docker/shell
 
 ## How to use
 
-See [examples folder](https://github.com/knork-fork/php-deploy-server/tree/master/examples) for workflow and script file
+See [examples folder](https://github.com/knork-fork/php-deploy-server/tree/master/examples) for workflow and script file.
+
+Add secrets to settings/secrets/actions on github and to .env/.env.local before setting up workflow.
