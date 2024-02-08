@@ -5,6 +5,7 @@ parameters:
     paths:
         - bin/
         - config/
+        - examples/
         - public/
         - src/
         #- tests/

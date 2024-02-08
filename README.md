@@ -35,3 +35,7 @@ Enter the shell:
 ```
 docker/shell
 ```
+
+## How to use
+
+See [examples folder]("https://github.com/knork-fork/php-deploy-server/tree/master/examples") for workflow and script file

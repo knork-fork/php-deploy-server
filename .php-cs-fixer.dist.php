@@ -2,6 +2,7 @@
 
 $finder = (new PhpCsFixer\Finder())
     ->in([
+        'examples/',
         'src/',
         #'tests/',
         #'migrations/',
