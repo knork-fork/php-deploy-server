@@ -36,12 +36,13 @@ jobs:
         with:
           php-version: '8.3'
 
-      - name: Deploy to server
-        run: echo "Deploying to server..."
+      - name: Get signed payload
+        env:
+          DEPLOY_TOKEN_SECRET: ${{ secrets.DEPLOY_TOKEN_SECRET }}
+          REPO_NAME: ${{ github.repository }}
+        id: signed_payload
+        run: echo "::set-output name=payload::$(php scripts/deploy/get_signed_payload.php)"
 
-      - name: Get deploy token
-        id: deploy_token
-        run: echo "::set-output name=token::$(php examples/get_token.php)"
+      - name: Echo signed payload
+        run: echo "The payload is ${{ steps.signed_payload.outputs.payload }}"
 
-      - name: Echo Token
-        run: echo "The token is ${{ steps.deploy_token.outputs.token }}"
