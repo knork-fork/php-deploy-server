@@ -21,3 +21,6 @@ services:
             - '.:/application'
             - './phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/8.3/fpm/conf.d/99-overrides.ini'
             - ./logs:/var/log
+            - './.host_ssh_keys:/application/.host_ssh_keys'
+        extra_hosts:
+            - "host.docker.internal:host-gateway"

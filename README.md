@@ -14,6 +14,12 @@ Run composer install:
 docker/composer install --no-interaction
 ```
 
+Add host ssh keys to container (deploy scripts need access outside of containerized environment):
+
+```
+scripts/add_host_ssh_keys.sh
+```
+
 By default app should be available @ `localhost:60001`
 
 Or if already built:
@@ -41,3 +47,5 @@ docker/shell
 See [examples folder](https://github.com/knork-fork/php-deploy-server/tree/master/examples) for workflow and script file.
 
 Add secrets to settings/secrets/actions on github and to .env/.env.local before setting up workflow.
+
+Make sure proper HOST_USER and HOST_FOLDER variables are set.

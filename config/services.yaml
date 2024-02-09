@@ -23,3 +23,8 @@ services:
     App\Service\PayloadValidatorService:
         arguments:
             $deployTokenSecret: '%env(DEPLOY_TOKEN_SECRET)%'
+
+    App\Service\DeployScriptService:
+        arguments:
+            $hostUser: '%env(HOST_USER)%'
+            $hostFolder: '%env(HOST_FOLDER)%'
