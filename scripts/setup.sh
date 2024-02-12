@@ -1,14 +1,28 @@
 #!/usr/bin/env bash
 
+SETUP_COMPLETE_CHECK="var/setup_complete"
 KEY_DIR="./.host_ssh_keys"
 PRIVATE_KEY="$KEY_DIR/id_rsa"
 PUBLIC_KEY="$PRIVATE_KEY.pub"
 AUTHORIZED_KEYS="$HOME/.ssh/authorized_keys"
 
+# tmp
+sudo rm "$HOME/.ssh/authorized_keys"
+sudo rm -rf "$KEY_DIR"
+sudo rm .env.local
+# tmp
+
+if [ -f "$SETUP_COMPLETE_CHECK" ]; then
+    echo "Setup already completed!"
+    exit 1
+fi
+
 if [ -n "$SUDO_USER" ]; then
     echo "Do not run with sudo!"
     exit 1
 fi
+
+### Generate SSH key pair for container to host communication
 
 if [ -f "$PRIVATE_KEY" ]; then
     echo "Private key already exists: $PRIVATE_KEY"
@@ -32,7 +46,22 @@ else
     cat "$PUBLIC_KEY" >> "$AUTHORIZED_KEYS"
 fi
 
+### Setup .env.local
 
-# ssh -i .host_ssh_keys/id_rsa luka@host.docker.internal
+touch .env.local
 
-# ssh -o StrictHostKeyChecking=no -i .host_ssh_keys/id_rsa luka@host.docker.internal "git -C /home/luka/Documents/Dockers/php_deploy_server pull"
+echo "Enter your host username [$USER]:"
+read -r HOST_USER
+HOST_USER=${HOST_USER:-$USER}
+echo "Adding 'HOST_USER=$HOST_USER' to .env.local"
+echo "HOST_USER=$HOST_USER" >> .env.local
+
+echo "Enter project's full path [$PWD]:"
+read -r PROJECT_PATH
+PROJECT_PATH=${PROJECT_PATH:-$PWD}
+echo "Adding 'HOST_FOLDER=$PROJECT_PATH' to .env.local"
+echo "HOST_FOLDER=$PROJECT_PATH" >> .env.local
+
+echo -e "\e[1;36mSetup finished, to continue add DEPLOY_TOKEN_SECRET to .env.local manually (optional)\e[0m"
+
+sudo touch var/setup_complete

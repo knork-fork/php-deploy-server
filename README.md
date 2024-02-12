@@ -14,10 +14,10 @@ Run composer install:
 docker/composer install --no-interaction
 ```
 
-Add host ssh keys to container (deploy scripts need access outside of containerized environment):
+Run setup script to setup local env variables and add host ssh keys to container (deploy scripts need access outside of containerized environment):
 
 ```
-scripts/add_host_ssh_keys.sh
+scripts/setup.sh
 ```
 
 By default app should be available @ `localhost:60001`
